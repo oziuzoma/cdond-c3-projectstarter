@@ -31,7 +31,6 @@ jobs:
           command: |
              # Your code here
              cd backend
-             npm login
              npm install
              npm run start 
       - save_cache:
