@@ -158,9 +158,9 @@ jobs:
           fingerprints: ["24:00:b3:17:72:a4:a5:2b:61:15:bf:83:1c:8e:12:8a"] 
       - attach_workspace:
           at: ~/
-      -run:
-         command: |
-           cat ~/project/.circleci/ansible/inventory.txt
+      - run:
+          command: |
+            cat ~/project/.circleci/ansible/inventory.txt
       - run:
           name: Install dependencies
           command: |
