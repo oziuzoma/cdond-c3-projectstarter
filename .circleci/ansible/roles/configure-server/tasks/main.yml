@@ -1,0 +1,4 @@
+---
+
+- name: Install dependencies
+  script: setup.sh
