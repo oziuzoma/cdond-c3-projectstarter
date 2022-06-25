@@ -29,8 +29,8 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            curl --insecure https://kvdb.io/NCVaoSeGAsfBqj9vWUuVZq/migration_${CIRCLE_WORKFLOW_ID:0:7})
-            # SUCCESS = 1 
+            curl --insecure https://kvdb.io/NCVaoSeGAsfBqj9vWUuVZq/migration_${CIRCLE_WORKFLOW_ID:0:7}
+            SUCCESS = 1 
             if(( $SUCCESS==1 ));
             then
                 cd ~/project/backend
@@ -343,9 +343,10 @@ jobs:
           command: |
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
-            --stack-name production-distro \
-            --parameter-overrides PipelineID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}"
-      # Here's where you will add some code to rollback on failure  
+            --stack-name InitialStack \
+            --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}"
+      - destroy-environment
+      - revert-migrations
 workflows:
   default:
     jobs:
