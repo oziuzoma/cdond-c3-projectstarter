@@ -29,7 +29,8 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = $(curl --insecure https://kvdb.io/NCVaoSeGAsfBqj9vWUuVZq/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            curl --insecure https://kvdb.io/NCVaoSeGAsfBqj9vWUuVZq/migration_${CIRCLE_WORKFLOW_ID:0:7})
+            # SUCCESS = 1 
             if(( $SUCCESS==1 ));
             then
                 cd ~/project/backend
@@ -289,8 +290,8 @@ jobs:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
-      # - attach_workspace:
-      #     at: ~/
+      - attach_workspace:
+          at: ~/
       - run:
           name: Install dependencies
           command: |
@@ -327,7 +328,24 @@ jobs:
             fi
       - destroy-environment
       - revert-migrations
-
+  
+  cloudfront-update:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            # your code here
+      - run:
+          name: Update cloudfront distribution
+          command: |
+            aws cloudformation deploy \
+            --template-file .circleci/files/cloudfront.yml \
+            --stack-name production-distro \
+            --parameter-overrides PipelineID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}"
+      # Here's where you will add some code to rollback on failure  
 workflows:
   default:
     jobs:
