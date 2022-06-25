@@ -207,20 +207,19 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
-            yum install tar gzip
+            yum install tar gzip -y
             yum update -y
             yum install software-properties-common -y
             add-yum-repository ppa:deadsnakes/ppa -y 
             apt update -y
             yum install python3.8 -y
             yum install nodejs -y
-            yum install npm -y
-            
+            yum install npm -y    
+      - attach_workspace:
+          at: ~/
       - run:
           name: Get backend url
           command: |
