@@ -245,7 +245,7 @@ jobs:
           name: Install dependencies
           command: |
             pip install awscli
-            apk add --update ansible tar gzip nodejs nodejs-npm npm-pm2
+            apk add --update ansible tar gzip nodejs nodejs-npm nodejs-pm2
             
       - run:
           name: Deploy backend
