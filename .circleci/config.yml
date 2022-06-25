@@ -348,4 +348,4 @@ workflows:
       #     requires: [run-migrations]
       # - deploy-backend:
       #     requires: [deploy-frontend]
-      - smoke_test
+      - smoke-test
