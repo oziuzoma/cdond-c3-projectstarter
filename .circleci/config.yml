@@ -313,7 +313,6 @@ jobs:
             echo ${URL} 
             if curl -s ${URL} | grep "Welcome"
             then
-                # Change this to 0 after the job fails
                 exit 0
             else
                 exit 1
@@ -329,7 +328,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y curl npm nodejs
+            yum install -y curl
       - run:
           name: Update cloudfront distribution
           command: |
@@ -348,15 +347,18 @@ jobs:
       - run:
           name: Get old stack workflow id
           command: |
-            export OldWorkflowID=$(aws cloudformation list-exports --query "Exports[?Name==\`WorkflowID\`].Value" --no-paginate --output text)
+            export OldWorkflowID=$(aws cloudformation \
+            list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+            --no-paginate --output text)
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
-            echo Stack names: "${STACKS[@]}" 
+            export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
+            --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
+            echo Stack names: "${STACKS[@]}"
       - run:
           name: Remove old stacks and files
           command: |
-            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
+            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               echo "-----------------Delete Confirmed----------------"
               aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
@@ -365,7 +367,7 @@ jobs:
             else
               echo "----------------No need to clean up because promotion failed-----------------"
             fi
-            
+      - destroy-environment     
    
   
 workflows:
