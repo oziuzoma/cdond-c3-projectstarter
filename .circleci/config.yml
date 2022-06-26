@@ -325,7 +325,7 @@ jobs:
             else
                 exit 1
             fi
-      - destroy-environment
+      # - destroy-environment
       - revert-migrations
   
   cloudfront-update:
@@ -346,6 +346,7 @@ jobs:
             --parameter-overrides WorkflowID="udapeople-${CIRCLE_WORKFLOW_ID:0:7}"
       - destroy-environment
       - revert-migrations
+  
 workflows:
   default:
     jobs:
