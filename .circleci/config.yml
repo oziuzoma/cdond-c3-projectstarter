@@ -344,9 +344,6 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run: yum install tar gzip
-      - attach_workspace:
-          at: ~/
       - run:
           name: Get old stack workflow id
           command: |
