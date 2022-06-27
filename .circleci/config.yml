@@ -361,7 +361,6 @@ jobs:
             else
               echo "----------------No need to clean up because promotion failed-----------------"
             fi
-      - destroy-environment
 
 workflows:
   default:
