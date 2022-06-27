@@ -359,7 +359,7 @@ jobs:
               aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
             else
-              echo "----------------No need to clean up because promotion failed-----------------"
+              echo "----------------No need to clean up-----------------"
             fi
 
 workflows:
