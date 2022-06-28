@@ -33,4 +33,4 @@
 
   roles:
     - configure-server
-    - configure-prometheus-node-exporter
+    - configure-prometheus-node-exporter #configures node-exporter on udapeople backend
