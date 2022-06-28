@@ -1,0 +1,27 @@
+Udapeople CI/CD Proposal
+
+What is DevOps?
+
+DevOps is a mindset and a culure adopated in a company to help automate tasks that are normally manual and error prone.
+
+What is CI/CD?
+
+CI/CD stands for continous integration and continous deployment.These two processes makes up continous delivery.
+CI/CD essentially seeks automate the build,test and analyze (CI) and the deployment stage (CD) in a way such that 
+a pipeline is created from the developers code straight to production.No longer do teams have to manually install
+and configure CI/CD servers to perform these tasks instead there are various CI/CD DevOps teams can use to 
+quickly create pipelines to deployement.The tools chosen would depend on the needs of the company.There are many benefits these
+tools provide.However, I must say the advantages out weigh the disadvantages.Lets take a closer look at some benefits this could
+give our team here at Udapeople.
+
+1. Deploy to Production Without Manual Checks
+   This means less time for applications to get to the market and reach it's consumers. 
+   Customers are happier, referrals increase, and revenue is boosted.
+   
+2. Detect Security Vulnerabilities
+   Prevents embarrassing or costly security holes. This avoids costs associated with data breaches
+  (exposed PII or PHI) and decreased revenue from loss of business reputation and client trust.
+
+The points outlined above among others all seek to increase revenue,avoid unneccessary avoids, protect revenue or reduce costs.The evidence
+is clear that Udapeople would be doing a great diservice to itself if this mindset and tools are not integrated into how we approach
+automation.Not everything can be automated but it is best practice to automate as much as possible.
